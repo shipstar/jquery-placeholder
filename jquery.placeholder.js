@@ -1,4 +1,5 @@
-/*! http://mths.be/placeholder v2.0.7 by @mathias */
+/*! Lives at http://github.com/shipstar/jquery-placeholder.git */
+/*! Forked from http://mths.be/placeholder v2.0.7 by @mathias */
 ;(function(window, document, $) {
 
 	var isInputSupported = 'placeholder' in document.createElement('input');
@@ -25,8 +26,8 @@
 				.filter((isInputSupported ? 'textarea' : ':input') + '[placeholder]')
 				.not('.placeholder')
 				.bind({
-					'focus.placeholder': clearPlaceholder,
-					'blur.placeholder': setPlaceholder
+					'keydown.placeholder': clearPlaceholder,
+					'blur.placeholder keyup.placeholder': setPlaceholder
 				})
 				.data('placeholder-enabled', true)
 				.trigger('blur.placeholder');
@@ -154,7 +155,7 @@
 							'placeholder-password': $input,
 							'placeholder-id': id
 						})
-						.bind('focus.placeholder', clearPlaceholder);
+						.bind('keydown.placeholder', clearPlaceholder);
 					$input
 						.data({
 							'placeholder-textinput': $replacement,
@@ -167,6 +168,7 @@
 			}
 			$input.addClass('placeholder');
 			$input[0].value = $input.attr('placeholder');
+			$input[0].setSelectionRange(0,0);
 		} else {
 			$input.removeClass('placeholder');
 		}
